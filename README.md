@@ -1,31 +1,40 @@
 # SmartHome
-This core version of SmartHome application to controle and monitor Philips Hue devices (motion sensor and light bulb).
+
+This core version of the SmartHome application controls and monitors Philips Hue devices, including motion sensors and light bulbs.
 
 ## The Application Parts
-The applicaion contains mongodb database to manage sensor and light data, controller for light and sensor individually and running the automation between the sensor and the light.
+
+The application consists of a MongoDB database to manage sensor and light data, controllers for lights and sensors individually, and the automation between the sensors and lights.
 
 ### Hardware
 
-Hue candle light bulb, Hue bridge and Hue sensor.
+Hue candle light bulb
+Hue bridge
+Hue sensor
 
 ### Database
-The Device_Registry_Servic directory contains:
 
-* light.device.js, sensor.device.js, triggered.event.js and connected.device to create mongoose schema
+TThe Device_Registry_Service directory contains:
 
-* index.js to manage inserting, deleting, updating and retriving the data about lights, sensors,the devices that are connected to the automation system and infoormation about the events that are triggered from the automation system
+* light.device.js, sensor.device.js, triggered.event.js, and connected.device.js to create Mongoose schema
+* index.js to manage inserting, deleting, updating, and retrieving data about lights, sensors, the devices connected to the automation system, and information about the triggered events.
 
 ### System Automation
+
 The Hue-automation directory contains:
-* Event emitters and its subscripers to turn the automation system on and off
 
-* Updating the connected devices when the system on the curren statate is active, and when the system off the current state is off
+* Event emitters and their subscribers to turn the automation system on and off.
 
-* Event emitters and its subscribers to react when the sensor presence is on then turn on the light, and when the sensor presence is off then turn the light off. This operation will continue executing while the system is on and will stop when the system is off
+* Updating the connected devices when the system is active and off when the system is off.
 
-* Insert the information about the triggred events and their time in the database
+* Event emitters and their subscribers to react when the sensor presence is detected, turning on the light, and turning off the light when the sensor presence is no longer detected. This operation continues while the system is on and stops when the system is off.
+
+*Inserting information about the triggered events and their time into the database.
 
 ### Light and Sensor without automation
+
 The Hue-light-sensor directory contains:
-* A controller (sensor-light-index.js) to get the current state of hue light and sensor without running the automation.
-* You can turn the light on or off in by http put request
+
+* A controller (sensor-light-index.js) to get the current state of the Hue light and sensor without running the automation.
+
+* Ability to turn the light on or off via an HTTP PUT request.

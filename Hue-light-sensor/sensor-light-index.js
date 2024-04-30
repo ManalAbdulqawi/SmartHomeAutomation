@@ -5,7 +5,7 @@ const express = require("express");
 
 const app = express();
 const server = http.createServer(app);
-const hueconnectivity = require("../Hue-automation/hue-url.js");
+const hueconnectivity = require("./hue-url.js");
 
 app.use(express.json());
 

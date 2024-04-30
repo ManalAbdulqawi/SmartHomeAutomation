@@ -13,8 +13,8 @@ const sensor = new EventEmitter();
 
 let eventstate;
 
-const SystemConDev = require("../Device_Registry_Service/connected.devices.js");
-const Eventtriggered = require("../Device_Registry_Service/triggered.event.js");
+const SystemConDev = require("./connected.devices.js");
+const Eventtriggered = require("./triggered.event.js");
 
 const hueconnectivity = require("./hue-url.js");
 const host = hueconnectivity.host;
