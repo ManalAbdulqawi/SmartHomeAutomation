@@ -1,3 +1,5 @@
 node_modules,
-Hue-light-controller/hue-url.js,
+Hue-automation/hue-url.js,
+Hue-light-sensor/hue-url.js,
+
 Device_Registry_Service/connectionString.js
