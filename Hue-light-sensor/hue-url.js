@@ -1,4 +1,4 @@
-const host = "http://192.168.1.174";
-const usrename = "SsuLdmWXsPOePgsIOCCn1puM61eh73TPBjKbe8pS";
+const host = "your hue bridge ip address";
+const usrename = "your hue bridge user name";
 const hueUrl = `${host}/api/${usrename}`;
 module.exports = { host, usrename, hueUrl };
