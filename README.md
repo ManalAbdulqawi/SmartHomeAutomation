@@ -2,7 +2,7 @@
 This core version of SmartHome application to controle and monitor Philips Hue devices (motion sensor and light bulb).
 
 ## The Application Parts
-The applicaion contains mongodb database to manage sensor and light data, controler for light and sensor individually and running the automation between the sensor and the light.
+The applicaion contains mongodb database to manage sensor and light data, controller for light and sensor individually and running the automation between the sensor and the light.
 
 ### Hardware
 
