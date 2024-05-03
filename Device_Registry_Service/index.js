@@ -258,7 +258,17 @@ app.delete("/api/connecteddevices/:id", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+//dlete all the triggered events
+app.delete("/api/triggeredevents", async (req, res) => {
+  try {
+    
+   await Eventtriggered.deleteMany();
 
+    res.status(200);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 mongoose
   .connect(
 connectivty.connectionString  )
