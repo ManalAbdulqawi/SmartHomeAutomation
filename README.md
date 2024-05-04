@@ -1,6 +1,6 @@
 # SmartHome
 
-This core version of the SmartHome application controls and monitors Philips Hue devices, including motion sensors and light bulbs.
+This core version of the SmartHome application controls and monitors Philips Hue devices, including motion sensor and light bulb.
 
 ## The Application Parts
 
