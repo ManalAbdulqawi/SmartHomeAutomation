@@ -8,13 +8,13 @@ The application consists of a MongoDB database to manage sensor and light data, 
 
 ### Hardware
 
-Hue candle light bulb
-Hue bridge
-Hue sensor
+* Hue candle light bulb
+* Hue bridge
+* Hue sensor
 
 ### Database
 
-TThe Device_Registry_Service directory contains:
+The Device_Registry_Service directory contains:
 
 * light.device.js, sensor.device.js, triggered.event.js, and connected.device.js to create Mongoose schema
 * index.js to manage inserting, deleting, updating, and retrieving data about lights, sensors, the devices connected to the automation system, and information about the triggered events.
@@ -29,7 +29,7 @@ The Hue-automation directory contains:
 
 * Event emitters and their subscribers to react when the sensor presence is detected, turning on the light, and turning off the light when the sensor presence is no longer detected. This operation continues while the system is on and stops when the system is off.
 
-*Inserting information about the triggered events and their time into the database.
+* Inserting information about the triggered events and their time into the database.
 
 ### Light and Sensor without automation
 
