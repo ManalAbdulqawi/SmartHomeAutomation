@@ -60,15 +60,16 @@ app.put("/devices/state/:onoff", async (req, res) => {
 });
 
 // Event Publisher to turn the system automation on
-
+let triggerflag = 0;
 function startPublisher() {
   if (!intervalId) {
     storetriggeredevent.storetriggered_event(
       "The automation system is turned on"
     );
     intervalId = setInterval(() => {
+      triggerflag++; // this flag will use to store triggered info in database every five sec
       system.emit("system-on", "The system is on");
-    }, 5000);
+    }, 1000);
   }
 }
 // Event Publisher to turn the system automation off
@@ -85,12 +86,20 @@ async function stopPublisher() {
 
 // System subscriber 1
 system.on("system-on", async (message) => {
+  let notfivesecflag = 0;
   // when system on, observe the interaction between sensor motion number 2 and other devices interact whith it
   if (sensor_2 && light_1) {
     console.log(message);
+
     // if the motion sensor 2 and light 1 exist in connected device DB exexute the interaction event between them
-    await sensor2ligh1event.sensor2light1event();
-  } else {console.log("sensor number 2 and/or light number 1 don't not exist");}
+    if (triggerflag >= 5) {
+      // after 5 sec the triggerflag will reset to = 0
+      await sensor2ligh1event.sensor2light1event(triggerflag);
+      triggerflag = 0;
+    } else await sensor2ligh1event.sensor2light1event(notfivesecflag);
+  } else {
+    console.log("sensor number 2 and/or light number 1 don't not exist");
+  }
 });
 
 // System subscriber 2

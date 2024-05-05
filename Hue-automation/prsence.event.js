@@ -3,13 +3,13 @@ const axios = require("axios");
 const EventEmitter = require("events");
 const sensor = new EventEmitter();
 const mongodbconnected = require("./mongodbconnection.js");
-const storetriggeredevent= require("./store.triggered.event.js");
+const storetriggeredevent = require("./store.triggered.event.js");
 
 const hueconnectivity = require("./hue-url.js");
 const hueUrl = hueconnectivity.hueUrl;
-
-async function sensor2light1event() {
-
+let eventfivesecflag = 0;// this variable will store event presense info every five sec
+async function sensor2light1event(triggerflag) {
+  eventfivesecflag = triggerflag;
   axios.get(`${hueUrl}/sensors/2`).then((rsp) => {
     const device = rsp.data;
     if (device.state.presence === true) {
@@ -24,11 +24,14 @@ sensor.on("presence-on", async (message) => {
   //make the light 1 on when sensor motion 2 presence = true
 
   {
-  console.log(" " + message);
+    console.log(" " + message);
     applyState(1, { on: true });
-   await storetriggeredevent.storetriggered_event(
-        "The sensor number 2 triggered motion presence-on event to turn on the light number 1" )
-     
+    if (eventfivesecflag >= 5) {
+      await storetriggeredevent.storetriggered_event(
+        "The sensor number 2 triggered motion presence-on event to turn on the light number 1"
+      );
+      eventfivesecflag = 0;
+    }
   }
 });
 
