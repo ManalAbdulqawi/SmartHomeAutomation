@@ -4,10 +4,16 @@ const EventEmitter = require("events");
 const sensor = new EventEmitter();
 const mongodbconnected = require("./mongodbconnection.js");
 const storetriggeredevent = require("./store.triggered.event.js");
+const client = require('prom-client');
 
 const hueconnectivity = require("./hue-url.js");
 const hueUrl = hueconnectivity.hueUrl;
 let eventfivesecflag = 0;// this variable will store event presense info every five sec
+
+const invokeCounter = new client.Counter({
+  name: 'presence_on_true_invocation_count',
+  help: 'Number of times there is amotion triggered event',
+});
 async function sensor2light1event(triggerflag) {
   eventfivesecflag = triggerflag;
   axios.get(`${hueUrl}/sensors/2`).then((rsp) => {
@@ -27,6 +33,8 @@ sensor.on("presence-on", async (message) => {
     console.log(" " + message);
     applyState(1, { on: true });
     if (eventfivesecflag >= 5) {
+      invokeCounter.inc();
+
       await storetriggeredevent.storetriggered_event(
         "The sensor number 2 triggered motion presence-on event to turn on the light number 1"
       );
@@ -52,4 +60,4 @@ const applyState = (id, state) => {
   });
 };
 
-module.exports = { sensor2light1event };
+module.exports = { sensor2light1event,invokeCounter };

@@ -18,6 +18,7 @@ const storetriggeredevent = require("./store.triggered.event.js");
 
 const mongodbconnected = require("./mongodbconnection.js");
 const sensor2ligh1event = require("./prsence.event.js");
+const client = require("prom-client");
 
 const hueconnectivity = require("./hue-url.js");
 const hueUrl = hueconnectivity.hueUrl;
@@ -31,6 +32,17 @@ app.use((req, res, next) => {
   next();
 });
 
+// Initialize the Prometheus client and register default metrics
+app.get("/metrics", async (req, res) => {
+  try {
+    res.set("Content-Type", client.register.contentType);
+    const metrics = await client.register.metrics();
+    res.send(metrics);
+  } catch (error) {
+    console.error("Error retrieving metrics:", error);
+    res.status(500).send("Error retrieving metrics");
+  }
+});
 app.put("/devices/state/:onoff", async (req, res) => {
   try {
     eventstate = req.params.onoff;

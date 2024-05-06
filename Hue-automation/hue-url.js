@@ -1,5 +1,5 @@
-const host = "your hue ip address";
-const usrename = "your hue username";
+const host = "your hue bridge ip addres";
+const usrename = "your hue bridge username";
 const hueUrl = `${host}/api/${usrename}`;
-const connectionString ="your mango db connection string"
+const connectionString = "your cloud mongo db connection string";
 module.exports = { host, usrename, hueUrl, connectionString };
