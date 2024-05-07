@@ -38,3 +38,8 @@ The Hue-light-sensor directory contains:
 * A controller (sensor-light-index.js) to get the current state of the Hue light and sensor without running the automation.
 
 * Ability to turn the light on or off via an HTTP PUT request.
+
+### Monitoring
+For monitoring purposes I have added logs to monitor the system running reaction when presens motion event triggerd by typing this messages when the automation system turned on (The system is on There is a motion), (The system is on There is no motion) and (The system off ) when turn the automation system off.
+
+Addtionally, I have added custom meteics to show how many times the triggered event of prsense-on stored in database every 5 seconds. The custom metrics is in Hue-automation/prsence.event.js, and to expose this custom metrics I have added Hue-automation/kubernetes/auto-service-monitor.yaml. Then I have setup argocd and deployed in argocd namespace Hue-automation/kubernetes and promethues https://prometheus-community.github.io/helm-charts. Then I used grafana to virtualise my custom metrics as it has showen in Screenshots folder.
